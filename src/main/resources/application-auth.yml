@@ -1,0 +1,21 @@
+---
+auth:
+  # db, ldap, memory
+  type: db
+
+---
+# jwt secret key 설정
+jwt:
+  privateKey: ${SPRING_APP_JWT_PRIVATE_KEY}
+  publicKey: ${SPRING_APP_JWT_PUBLIC_KEY}
+  password: ${SPRING_APP_JWT_PASSWORD}
+  alias: ${SPRING_APP_JWT_ALIAS}
+  tokenExpiry: 1800000
+  refreshTokenExpiry: 604800000
+
+---
+# 토큰 관련 secret Key 및 RedirectUri 설정
+app:
+  oauth2:
+    authorizedRedirectUris:
+      - http://localhost:5173/token

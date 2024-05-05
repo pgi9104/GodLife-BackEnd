@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: ${SPRING_APP_DATABASE_DRIVER_CLASS_NAME}
+    url: ${SPRING_APP_DATABASE_URL}
+    username: ${SPRING_APP_DATABASE_USERNAME}
+    password: ${SPRING_APP_DATABASE_PASSWORD}
+    sql-script-encoding: utf-8
+  jpa:
+    hibernate:
+      ddl-auto: update	      # DB 초기화 전략 (none, create, create-drop, update, validate)
+    properties:
+      hibernate:
+        format_sql: true      # 쿼리 로그 포맷 (정렬)
+        show_sql: false        # 쿼리 로그 출력
