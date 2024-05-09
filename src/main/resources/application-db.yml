@@ -1,14 +1,17 @@
 spring:
   datasource:
-    driver-class-name: ${SPRING_APP_DATABASE_DRIVER_CLASS_NAME}
-    url: ${SPRING_APP_DATABASE_URL}
+    #driver-class-name: ${SPRING_APP_DATABASE_DRIVER_CLASS_NAME}
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    #url: ${SPRING_APP_DATABASE_URL}
+    url: jdbc:log4jdbc:mariadb://192.168.56.10:53307/AUTH_DB?characterEncoding=UTF-8
     username: ${SPRING_APP_DATABASE_USERNAME}
     password: ${SPRING_APP_DATABASE_PASSWORD}
     sql-script-encoding: utf-8
   jpa:
     hibernate:
-      ddl-auto: update	      # DB 초기화 전략 (none, create, create-drop, update, validate)
+      ddl-auto: none	      # DB 초기화 전략 (none, create, create-drop, update, validate)
     properties:
       hibernate:
         format_sql: true      # 쿼리 로그 포맷 (정렬)
-        show_sql: false        # 쿼리 로그 출력
+        show_sql: true        # 쿼리 로그 출력
+    
