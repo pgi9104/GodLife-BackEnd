@@ -10,7 +10,9 @@ import com.gen.script.api.menu.service.MenuService;
 import com.gen.script.utils.tree.builder.TreeBuilder;
 
 import jakarta.annotation.Resource;
+import jakarta.transaction.Transactional;
 
+@Transactional
 @Service("menuService")
 public class MenuServiceImpl implements MenuService{
 	

@@ -2,6 +2,7 @@ package com.gen.script.api.menu.dao;
 
 import java.util.List;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 import com.gen.script.api.menu.domain.MenuVO;
@@ -16,8 +17,11 @@ public class MenuDAO extends CommonDAO{
 
 	public int insertMenu(List<MenuVO> addList) throws Exception{
 		int result = 0;
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		for(MenuVO vo : addList) {
+			vo.setInsId(userId);
+			vo.setUpdId(userId);
 			result += insert("menu.insertMenu", vo);
 		}
 		
@@ -36,7 +40,10 @@ public class MenuDAO extends CommonDAO{
 
 	public int updateMenu(List<MenuVO> updateList) {
 		int result = 0;
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		
 		for(MenuVO vo : updateList) {
+			vo.setUpdId(userId);
 			result += update("menu.updateMenu", vo);
 		}
 		

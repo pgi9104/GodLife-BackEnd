@@ -40,7 +40,7 @@ public class User extends BaseEntity{
     @Size(max = 128)
     private String password;
 
-    @Column(name = "EMAIL", length = 512, unique = true)
+    @Column(name = "EMAIL", length = 512)
     @NotNull
     @Size(max = 512)
     private String email;
@@ -55,7 +55,7 @@ public class User extends BaseEntity{
     @Size(max = 512)
     private String profileImageUrl;
 
-    @Column(name = "PROVIDER_TYPE", length = 20, unique = true)
+    @Column(name = "PROVIDER_TYPE", length = 20)
     @Enumerated(EnumType.STRING)
     @NotNull
     private ProviderType providerType;

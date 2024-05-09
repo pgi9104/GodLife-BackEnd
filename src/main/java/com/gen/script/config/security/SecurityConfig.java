@@ -64,6 +64,7 @@ public class SecurityConfig {
 					.requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
 					.requestMatchers("/api/token").denyAll()		//토큰 재발급은 인증 없이 접근 가능
 					.requestMatchers("*/oauth2/**").permitAll()
+					.requestMatchers("/api/**").permitAll()
 					.anyRequest().authenticated())	//설정된 값 이외의 나머지 URL, 인증된 사용자, 로그인한 사용자만 볼 수 있음
 			.exceptionHandling(exceptionHandling ->
 				exceptionHandling
