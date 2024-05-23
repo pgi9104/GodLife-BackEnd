@@ -4,20 +4,20 @@
 	<select id="selectMenuList" parameterType="com.gen.script.api.menu.domain.MenuVO" resultType="com.gen.script.api.menu.domain.MenuVO">
 		SELECT
 			MENU_CD
-			, MENU_CD TREE_CD
+			, MENU_CD AS TREE_CD
 			, UP_MENU_CD
-			, UP_MENU_CD PARENT
+			, UP_MENU_CD AS PARENT
 			, URL
 			, MENU_NAME
 			, SORT_SEQ
 			, USE_YN
-		FROM MENU
+		FROM PGI_MENU
 		ORDER BY SORT_SEQ, UP_MENU_CD DESC
 	</select>
 	
 	<insert id="insertMenu" parameterType="com.gen.script.api.menu.domain.MenuVO">
 		/* menu.insertMenu */
-		INSERT INTO MENU(
+		INSERT INTO PGI_MENU(
 			MENU_CD
 			, UP_MENU_CD
 			, URL
@@ -44,7 +44,7 @@
 	
 	<update id="updateMenu" parameterType="com.gen.script.api.menu.domain.MenuVO">
 		/* menu.updateMenu */
-		UPDATE MENU SET
+		UPDATE PGI_MENU SET
 		UP_MENU_CD	= #{upMenuCd}
 		, URL		= #{url}
 		, MENU_NAME	= #{menuName}
@@ -55,7 +55,7 @@
 	
 	<delete id="deleteMenu" parameterType="com.gen.script.api.menu.domain.MenuVO">
 		/* menu.deleteMenu */
-		DELETE FROM MENU
+		DELETE FROM PGI_MENU
 		WHERE MENU_CD = #{menuCd}
 	</delete>
 </mapper>

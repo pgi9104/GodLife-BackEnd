@@ -14,5 +14,5 @@ public abstract class TreeVO extends CommonVO implements ITreeAble{
 	private String treeCd;
 	private String parent;
 	private List<TreeVO> children;
-	private int depth;
+	private int level;
 }

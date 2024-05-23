@@ -25,5 +25,4 @@ cors:
 mybatis:
   # mapper location - 바라 볼 xml 파일을 지정합니다.
   mapper-locations: "classpath*:mapper/**/*.xml"
-  # column name to camel case - 반환 받는 컬럼명을 CamelCase로 받는 설정을 합니다.
   config-location: classpath:mybatis-config.xml

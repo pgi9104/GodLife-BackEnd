@@ -71,7 +71,7 @@ public class TreeBuilder<T extends TreeVO> {
 			level = 0;
 		}
 		
-		base.setDepth(level);
+		base.setLevel(level);
 		
 		if(this.childMap.containsKey(base.getTreeCd())) {
 			base.setChildren((List<TreeVO>)this.childMap.get(base.getTreeCd()));

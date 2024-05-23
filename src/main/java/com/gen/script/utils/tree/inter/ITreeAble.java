@@ -13,6 +13,6 @@ public interface ITreeAble {
 	public void setChildren(List<TreeVO> children);
 	public int getSortSeq();
 	public void setSortSeq(int sortSeq);
-	public int getDepth();
-	public void setDepth(int depth);
+	public int getLevel();
+	public void setLevel(int level);
 }
