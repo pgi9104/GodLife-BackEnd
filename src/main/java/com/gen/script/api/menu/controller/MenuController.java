@@ -23,7 +23,8 @@ public class MenuController {
 	@GetMapping("/api/menu/menuRoot.ajax")
 	public ModelAndView menuRoot(MenuVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView("jsonView");
-		mav.addObject("menuRoot", menuService.selectRoot(vo));
+		MenuVO root = menuService.selectRoot(vo);
+		mav.addObject("menuRoot", root);
 		return mav;
 	}
 	
@@ -39,7 +40,6 @@ public class MenuController {
 	
 	@PostMapping(value="/api/menu/saveMenu.ajax")
 	public ModelAndView save(@RequestBody MenuVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		ModelAndView mav = new ModelAndView("jsonView");
 		mav.addObject("result",menuService.saveMenu(vo));
 		return mav;
