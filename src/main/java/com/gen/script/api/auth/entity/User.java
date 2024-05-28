@@ -19,8 +19,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "USERS")
 @NoArgsConstructor
+@Table(name = "PGI_USERS")
 @EqualsAndHashCode(callSuper = false, of = {"userId"})
 public class User extends BaseEntity{
     @Id
@@ -35,7 +35,7 @@ public class User extends BaseEntity{
     private String username;
 
     @JsonIgnore
-    @Column(name = "PASSWORD", length = 128)
+    @Column(name = "PASSWORD", length = 255)
     @NotNull
     @Size(max = 128)
     private String password;
@@ -64,7 +64,7 @@ public class User extends BaseEntity{
     @Enumerated(EnumType.STRING)
     @NotNull
     private RoleType roleType;
-
+    
     public User(
             @NotNull @Size(max = 64) String userId,
             @NotNull @Size(max = 100) String username,
@@ -85,5 +85,8 @@ public class User extends BaseEntity{
         this.profileImageUrl = profileImageUrl != null ? profileImageUrl : "";
         this.providerType = providerType;
         this.roleType = roleType;
+        
+        this.setInsId(userId);
+        this.setUpdId(userId);
     }
 }

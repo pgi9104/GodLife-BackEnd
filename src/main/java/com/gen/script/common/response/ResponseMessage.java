@@ -1,25 +1,25 @@
 package com.gen.script.common.response;
 
-import com.gen.script.common.response.type.StatusMsg;
+import java.util.HashMap;
+import java.util.Map;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-public class ResponseMessage {
-	private StatusMsg status;
-	private Integer statusCode;
-	private String statusMessage;
+@NoArgsConstructor
+@AllArgsConstructor
+public class ResponseMessage{
 	private String message;
-	private Object data;
+	private Map<String, Object> data;
 	
-	public ResponseMessage setStatus() {
-		if(this.message == null || "".equals(this.message.trim())) {
-			this.message = getStatus().getMessage();
+	public void add(String key, Object value) {
+		if(data == null) {
+			data = new HashMap<String, Object>();
 		}
-		this.statusCode = getStatus().getStatusCode();
-		this.statusMessage = getStatus().getStatusMessage();
-		return this;
+		data.put(key, value);
 	}
 }

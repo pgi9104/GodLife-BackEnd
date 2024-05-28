@@ -12,35 +12,37 @@ import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @EntityListeners(AuditingEntityListener.class)
-@NoArgsConstructor
 @MappedSuperclass
-public abstract class BaseEntity {
-	@Column(name="CREATED_ID")
+public abstract class BaseEntity{
+	@Column(name="INS_ID")
 	@NotNull
 	@Size(max = 64)
-    private String createdId;
+    private String insId;
 	
-	@Column(name="MODIFIED_ID")
+	@Column(name="UPD_ID")
 	@NotNull
 	@Size(max = 64)
-    private String modifiedId;
+    private String updId;
 	
-    @Column(name = "CREATED_AT", updatable = false)
+    @Column(name = "INS_DT", updatable = false)
     @CreatedDate
     @NotNull
-    private LocalDateTime createdAt;
+    private LocalDateTime insDt;
 
-    @Column(name = "MODIFIED_AT")
+    @Column(name = "UPD_DT")
     @LastModifiedDate
     @NotNull
-    private LocalDateTime modifiedAt;
+    private LocalDateTime updDt;
     
-    public BaseEntity(@NotNull @Size(max = 64) String createdId, @NotNull @Size(max = 64) String modifiedId) {
-    	this.createdId = createdId;
-    	this.modifiedId = modifiedId;
+    public BaseEntity() {
+    	
+    }
+    
+    public BaseEntity(@NotNull @Size(max = 64) String insId, @NotNull @Size(max = 64) String updId) {
+    	this.insId = insId;
+    	this.updId = updId;
     }
 }

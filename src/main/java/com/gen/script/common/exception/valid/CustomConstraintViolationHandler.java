@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.gen.script.common.response.ResponseMessage;
-import com.gen.script.common.response.type.StatusMsg;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -21,9 +20,8 @@ public class CustomConstraintViolationHandler {
 		String errorMessage = getResultMessage(e.getConstraintViolations().iterator());
 		
 		ResponseMessage result = ResponseMessage.builder()
-			.status(StatusMsg.BAD_REQUEST)
 			.message(errorMessage)
-			.build().setStatus();
+			.build();
 
 		log.error(errorMessage);
 		return ResponseEntity.badRequest().body(result);

@@ -29,7 +29,7 @@
 		<constructor-arg ref="messageSource"/>
 	</bean>
 	<!-- MessageSource를 사용하기 위한 MessageUtils 매핑 -->
-	<bean id="message" class="com.gen.script.config.MessageUtils">
+	<bean id="message" class="com.gen.script.config.message.MessageUtils">
 		<property name="messageSourceAccessor" ref="messageSourceAccessor"/>
 	</bean>
 	<!--

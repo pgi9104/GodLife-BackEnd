@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gen.script.common.response.ResponseMessage;
-import com.gen.script.common.response.type.StatusMsg;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,9 +33,8 @@ public class CustomMethodArgumentNotValidHandler{
 		String message = getMessage(allErrors.iterator());
 		e.printStackTrace();
 		ResponseMessage result = ResponseMessage.builder()
-			.status(StatusMsg.BAD_REQUEST)
 			.message(message)
-			.build().setStatus();
+			.build();
 
 		return ResponseEntity.badRequest().body(result);
 	}
@@ -75,7 +73,6 @@ public class CustomMethodArgumentNotValidHandler{
 		String message = getMessage(allErrors.iterator());
 
 		ResponseMessage result = ResponseMessage.builder()
-			.status(StatusMsg.BAD_REQUEST)
 			.message(message)
 			.build();
 		return ResponseEntity.badRequest().body(result);

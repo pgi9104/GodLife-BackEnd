@@ -26,3 +26,13 @@ mybatis:
   # mapper location - 바라 볼 xml 파일을 지정합니다.
   mapper-locations: "classpath*:mapper/**/*.xml"
   config-location: classpath:mybatis-config.xml
+
+---
+# message property setting
+spring:
+  messages:
+    besaename: message/messages
+    encoding: UTF-8
+    fallback-to-system-locale: true
+    always-use-message-format: true
+    use-code-default-message: true

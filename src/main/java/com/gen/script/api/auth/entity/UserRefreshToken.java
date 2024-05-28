@@ -14,9 +14,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @Entity
-@Table(name = "USER_REFRESH_TOKEN")
+@NoArgsConstructor
+@Table(name = "PGI_USER_REFRESH_TOKEN")
 public class UserRefreshToken extends BaseEntity{
     @Id
     @Column(name = "USER_ID", length = 64, unique = true)
@@ -28,7 +28,7 @@ public class UserRefreshToken extends BaseEntity{
     @NotNull
     @Size(max = 1000)
     private String refreshToken;
-
+    
     public UserRefreshToken(
             @NotNull @Size(max = 64) String userId,
             @NotNull @Size(max = 1000) String refreshToken
@@ -36,5 +36,7 @@ public class UserRefreshToken extends BaseEntity{
     	super(userId, userId);
         this.userId = userId;
         this.refreshToken = refreshToken;
+        this.setInsId(userId);
+        this.setUpdId(userId);
     }
 }

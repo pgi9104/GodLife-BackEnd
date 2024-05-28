@@ -19,9 +19,8 @@ public class CustomExceptionHandler {
 		log.error(e.getMessage());
 		ResponseMessage result = ResponseMessage.builder()
 									.message(e.getStatusMsg().getMessage())
-									.status(e.getStatusMsg())
-									.data(e.getData())
-									.build().setStatus();
+									.build();
+		result.add("exception", e.getData());
 		return ResponseEntity.status(e.getStatusMsg().getHttpStatus()).body(result);
 	}
 }
