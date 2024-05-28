@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gen.script.api.project.domain.ProjectModel;
 import com.gen.script.api.project.domain.ProjectVO;
 import com.gen.script.api.project.domain.assembler.ProjectAssembler;
-import com.gen.script.api.project.service.impl.ProjectService;
+import com.gen.script.api.project.service.ProjectService;
 import com.gen.script.common.response.ResponseMessage;
 
 import jakarta.annotation.Resource;

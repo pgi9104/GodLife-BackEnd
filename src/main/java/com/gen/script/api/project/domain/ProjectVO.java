@@ -15,7 +15,6 @@ public class ProjectVO extends CommonVO{
 	private String projectName;
 	private String projectComment;
 	private List<PackageVO> packages;
-	private Integer sortSeq;
 	
 	private List<ProjectVO> addList;
 	private List<ProjectVO> updateList;

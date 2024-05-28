@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.gen.script.api.project.dao.ProjectDAO;
 import com.gen.script.api.project.domain.ProjectVO;
+import com.gen.script.api.project.service.ProjectService;
 
 import jakarta.annotation.Resource;
 
