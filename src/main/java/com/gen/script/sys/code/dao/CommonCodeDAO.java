@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.gen.script.common.dao.CommonDAO;
 import com.gen.script.sys.code.domain.CommonCodeDTO;
+import com.gen.script.utils.TokenUtil;
 
 @Repository(value="commonCodeDAO")
 public class CommonCodeDAO extends CommonDAO{
@@ -35,6 +36,8 @@ public class CommonCodeDAO extends CommonDAO{
 		int result = 0;
 		
 		for(CommonCodeDTO vo : addList) {
+			vo.setInsId(TokenUtil.getUserName());
+			vo.setUpdId(TokenUtil.getUserName());
 			result += insert("commonCode.insertCode", vo);
 		}
 		
@@ -45,6 +48,7 @@ public class CommonCodeDAO extends CommonDAO{
 		int result = 0;
 		
 		for(CommonCodeDTO vo : updateList) {
+			vo.setUpdId(TokenUtil.getUserName());
 			result += update("commonCode.updateCode", vo);
 		}
 		
@@ -64,6 +68,8 @@ public class CommonCodeDAO extends CommonDAO{
 		int result = 0;
 		
 		for(CommonCodeDTO vo : addList) {
+			vo.setInsId(TokenUtil.getUserName());
+			vo.setUpdId(TokenUtil.getUserName());
 			result += insert("commonCode.insertCodeDetail", vo);
 		}
 		
@@ -72,8 +78,10 @@ public class CommonCodeDAO extends CommonDAO{
 	
 	public int updateCodeDetail(List<CommonCodeDTO> updateList) {
 		int result = 0;
-		
+
 		for(CommonCodeDTO vo : updateList) {
+			vo.setInsId(TokenUtil.getUserName());
+			vo.setUpdId(TokenUtil.getUserName());
 			result += update("commonCode.updateCodeDetail", vo);
 		}
 		

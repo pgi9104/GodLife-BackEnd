@@ -71,6 +71,7 @@ public class AuthToken {
             log.debug("\n[JWT][EXCEPTION][UNSUPPORTED_TOKEN][Unsupported JWT token.]");
         } catch (IllegalArgumentException e) {
             log.debug("\n[JWT][EXCEPTION][INVALID_ARGUMENT][JWT token compact of handler are invalid.]");
+            e.printStackTrace();
         }
         return null;
     }

@@ -3,8 +3,6 @@ package com.gen.script.common.domain;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-
 import lombok.Data;
 
 @Data
@@ -26,8 +24,5 @@ public class CommonVO {
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
 		insDt = sdf.format(new Date());
 		updDt = insDt;
-		String id = SecurityContextHolder.getContext().getAuthentication().getName();
-		insId = id;
-		updId = id;
 	}
 }

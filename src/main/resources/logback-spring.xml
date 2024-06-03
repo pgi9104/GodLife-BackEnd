@@ -38,7 +38,7 @@
 	
 	<logger name="org.mariadb.jdbc.client.impl.StandardClient" level="OFF" />
 	<!-- 시스템 로그 -->
-	<logger name="com.gen.script" level="INFO"/>
+	<logger name="com.gen.script" level="DEBUG"/>
     <root level="DEBUG">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="ROLLING"/>

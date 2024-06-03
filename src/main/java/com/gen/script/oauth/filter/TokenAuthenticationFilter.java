@@ -42,6 +42,8 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     	return request.getServletPath().equals("/oauth2/authorization")
     				|| request.getServletPath().equals("/error")
     				|| request.getServletPath().equals("/favicon.ico")
+    				|| request.getServletPath().equals("/token")
+    				|| request.getServletPath().equals("/api/menu/menuRoot.ajax")
     				|| request.getServletPath().equals("/");
     }
 }
