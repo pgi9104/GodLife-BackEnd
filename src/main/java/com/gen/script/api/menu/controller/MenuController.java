@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gen.script.api.menu.domain.MenuVO;
 import com.gen.script.api.menu.service.MenuService;
+import com.gen.script.sys.code.service.CommonCodeService;
 
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +20,9 @@ public class MenuController {
 	
 	@Resource(name="menuService")
 	private MenuService menuService;
+	
+	@Resource(name="commonCodeService")
+	private CommonCodeService commonCodeService;
 	
 	@GetMapping("/api/menu/menuRoot.ajax")
 	public ModelAndView menuRoot(MenuVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -35,6 +39,7 @@ public class MenuController {
 		vo.setUpdId(userId);
 		ModelAndView mav = new ModelAndView("jsonView");
 		mav.addObject("menuList", menuService.selectMenuList(vo));
+		mav.addObject("selectBoxYn", commonCodeService.selectCodeDetailList("CD001"));
 		return mav;
 	}
 	

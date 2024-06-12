@@ -1,0 +1,185 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ddl">
+	<select id="selectDdlList" parameterType="com.gen.script.api.ddl.domain.DdlDTO" resultType="com.gen.script.api.ddl.domain.DdlDTO">
+		SELECT
+			PROJECT_CODE
+			, TABLE_NAME 
+			, TABLE_COL
+			, COL_TYPE
+			, COL_TYPE_LMT
+			, NULLABLE
+			, COL_PK
+			, DEFAULT_VALUE
+			, COMMENT
+			, SORT_SEQ
+			, INS_ID
+			, INS_DT
+			, UPD_ID
+			, UPD_DT
+		FROM PGI_DDL M
+		WHERE 1=1
+		<if test='projectCode != null and projectCode != ""'>
+			AND M.PROJECT_CODE = #{projectCode}
+		</if>
+		<if test='tableName != null and tableName != ""'>
+			AND M.TABLE_NAME = #{tableName}
+		</if>
+		<if test='tableCol != null and tableCol != ""'>
+			AND M.TABLE_COL = #{tableCol}
+		</if>
+		<if test='searchTxt != null and searchTxt != ""'>
+			AND (
+				M.PROJECT_CODE LIKE CONCAT(CONCAT('%',#{searchTxt}),'%')
+				OR M.TABLE_NAME LIKE CONCAT(CONCAT('%',#{searchTxt}),'%')
+				OR M.TABLE_COL LIKE CONCAT(CONCAT('%',#{searchTxt}),'%')
+				OR M.DEFAULT_VALUE LIKE CONCAT(CONCAT('%',#{searchTxt}),'%')
+				OR M.COMMENT LIKE CONCAT(CONCAT('%',#{searchTxt}),'%')
+			)
+		</if>
+		ORDER BY M.SORT_SEQ ASC
+	</select>
+	
+	<select id="selectBox" parameterType="com.gen.script.api.ddl.domain.DdlDTO" resultType="com.gen.script.api.ddl.domain.DdlDTO">
+		SELECT
+			PROJECT_CODE
+			, TABLE_NAME
+			, TABLE_COL
+		FROM PGI_DDL M
+		GROUP BY PROJECT_CODE, TABLE_NAME, TABLE_COL
+		ORDER BY M.SORT_SEQ ASC
+	</select>
+	
+	<insert id="insertDdlList" parameterType="java.util.List">
+		INSERT INTO PGI_DDL(
+			PROJECT_CODE
+			, TABLE_NAME 
+			, TABLE_COL
+			, COL_TYPE
+			, COL_TYPE_LMT
+			, NULLABLE
+			, COL_PK
+			, DEFAULT_VALUE
+			, COMMENT
+			, SORT_SEQ
+			, INS_ID
+			, INS_DT
+			, UPD_ID
+			, UPD_DT
+		) VALUES
+		<foreach collection="list" item="item" separator=",">
+			(
+				#{item.projectCode}
+				, #{item.tableName}
+				, #{item.tableCol}
+				, #{item.colType}
+				, #{item.colTypeLmt}
+				, #{item.nullable}
+				, #{item.colPk}
+				, #{item.defaultValue}
+				, #{item.comment}
+				, #{item.sortSeq}
+				, #{item.insId}
+				, #{item.insDt}
+				, #{item.updId}
+				, #{item.updDt}
+			)
+		</foreach>
+	</insert>
+	
+	<update id="updateDdlList" parameterType="java.util.List">
+		UPDATE
+			PGI_DDL M1, 
+			(SELECT
+				PROJECT_CODE
+				, TABLE_NAME
+				, TABLE_COL
+				, COL_TYPE
+				, COL_TYPE_LMT
+				, NULLABLE
+				, COL_PK
+				, DEFAULT_VALUE
+				, COMMENT
+				, SORT_SEQ
+				, UPD_ID
+				, UPD_DT
+			FROM(
+			<foreach collection="list" item="item" separator="UNION">
+				SELECT 
+					#{item.projectCode} PROJECT_CODE
+					, #{item.tableName} TABLE_NAME
+					, #{item.tableCol} TABLE_COL
+					, #{item.colType} COL_TYPE
+					, #{item.colTypeLmt} COL_TYPE_LMT
+					, #{item.nullable} NULLABLE
+					, #{item.colPk} COL_PK
+					, #{item.defaultValue} DEFAULT_VALUE
+					, #{item.comment} COMMENT
+					, #{item.sortSeq} SORT_SEQ
+					, #{item.updId} UPD_ID
+					, #{item.updDt} UPD_DT
+				FROM (SELECT 1) A
+			</foreach>
+			) A
+		)M2
+		SET
+			M1.PROJECT_CODE = M2.PROJECT_CODE
+			, M1.TABLE_NAME = M2.TABLE_NAME
+			, M1.TABLE_COL = M2.TABLE_COL
+			, M1.COL_TYPE = M2.COL_TYPE
+			, M1.COL_TYPE_LMT = M2.COL_TYPE_LMT
+			, M1.NULLABLE = M2.NULLABLE
+			, M1.COL_PK = M2.COL_PK
+			, M1.DEFAULT_VALUE = M2.DEFAULT_VALUE
+			, M1.COMMENT = M2.COMMENT
+			, M1.UPD_ID = M2.UPD_ID
+			, M1.UPD_DT = M2.UPD_DT
+		WHERE M1.PROJECT_CODE = M2.PROJECT_CODE
+			AND M1.TABLE_NAME = M2.TABLE_NAME
+			AND M1.TABLE_COL = M2.TABLE_COL
+	</update>
+	
+	<delete id="deleteDdlList" parameterType="java.util.List">
+		DELETE PGI_DDL
+		FROM PGI_DDL,
+			(SELECT
+				B.PROJECT_CODE
+				, B.TABLE_NAME
+				, B.TABLE_COL
+				, B.COL_TYPE
+				, B.COL_TYPE_LMT
+				, B.NULLABLE
+				, B.COL_PK
+				, B.DEFAULT_VALUE
+				, B.COMMENT
+				, B.SORT_SEQ
+				, B.INS_ID
+				, B.INS_DT
+				, B.UPD_ID
+				, B.UPD_DT
+			FROM(
+			<foreach collection="list" item="item" separator="UNION">
+				SELECT 
+					#{item.projectCode} PROJECT_CODE
+					, #{item.tableName} TABLE_NAME
+					, #{item.tableCol} TABLE_COL
+					, #{item.colType} COL_TYPE
+					, #{item.colTypeLmt} COL_TYPE_LMT
+					, #{item.nullable} NULLABLE
+					, #{item.colPk} COL_PK
+					, #{item.defaultValue} DEFAULT_VALUE
+					, #{item.comment} COMMENT
+					, #{item.sortSeq} SORT_SEQ
+					, #{item.insId} INS_ID
+					, #{item.insDt} INS_DT
+					, #{item.updId} UPD_ID
+					, #{item.updDt} UPD_DT
+				FROM (SELECT 1) A
+			</foreach>
+			) B
+		) M
+		WHERE PGI_DDL.PROJECT_CODE = M.PROJECT_CODE
+			AND PGI_DDL.TABLE_NAME = M.TABLE_NAME
+			AND PGI_DDL.TABLE_COL = M.TABLE_COL
+	</delete>
+</mapper>
